@@ -64,6 +64,7 @@ module.exports = {
     'react/jsx-fragments': [1, 'element'],
     'react/function-component-definition': [2, { namedComponents: 'function-declaration' }],
     'import/prefer-default-export': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
     'prettier/prettier': [
       'error',
       {

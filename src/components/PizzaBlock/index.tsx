@@ -1,28 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { PizzaBlockProps } from './types';
+import { Pizza } from './types';
 
-function PizzaBlock({ title, price }: PizzaBlockProps) {
+function PizzaBlock({ title, types, sizes, price, imageUrl }: Pizza) {
+  const [activeSize, setActiveSize] = useState(sizes[0]);
+  const [activeType, setActiveType] = useState(0);
+
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
         <a href="/pizza/4">
-          <img
-            className="pizza-block__image"
-            src="https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-            alt="Pizza"
-          />
+          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
           <h4 className="pizza-block__title">{title}</h4>
         </a>
         <div className="pizza-block__selector">
           <ul>
-            <li className="active">тонкое</li>
-            <li className="">традиционное</li>
+            {types.map((type) => (
+              <li
+                key={type}
+                onClick={() => setActiveType(type)}
+                className={activeType === type ? 'active' : ''}
+                role="presentation"
+              >
+                {type === 0 ? 'тонкое' : 'традиционное'}
+              </li>
+            ))}
           </ul>
           <ul>
-            <li className="active">26 см.</li>
-            <li className="">30 см.</li>
-            <li className="">40 см.</li>
+            {sizes.map((size) => (
+              <li
+                key={size}
+                onClick={() => setActiveSize(size)}
+                className={activeSize === size ? 'active' : ''}
+                role="presentation"
+              >
+                {size} см.
+              </li>
+            ))}
           </ul>
         </div>
         <div className="pizza-block__bottom">
