@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-import { Pizza } from './types';
+import { PizzaBlockProps } from './types';
 
-function PizzaBlock({ title, types, sizes, price, imageUrl }: Pizza) {
+function PizzaBlock({ pizza }: PizzaBlockProps) {
+  const { title, price, types, sizes, imageUrl } = pizza;
+
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [activeType, setActiveType] = useState(0);
 

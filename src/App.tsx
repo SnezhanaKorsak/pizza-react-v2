@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
 import PizzaBlock from './components/PizzaBlock';
 
-import pizzaList from './assets/pizza.json';
+import { pizzaApi } from './api/pizza-api';
+
+import { Pizza } from './components/PizzaBlock/types';
 
 import './scss/app.scss';
 
 function App() {
+  const [pizzaList, setPizzaList] = useState<Pizza[]>([]);
+
+  useEffect(() => {
+    pizzaApi.getPizzaData().then((res) => setPizzaList(res.data));
+  }, []);
+
   return (
     <div className="wrapper">
       <Header />
@@ -22,7 +30,7 @@ function App() {
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             {pizzaList.map((pizza) => (
-              <PizzaBlock key={pizza.id} {...pizza} />
+              <PizzaBlock key={pizza.id} pizza={pizza} />
             ))}
           </div>
           <ul className="Pagination_root__uwB0O">

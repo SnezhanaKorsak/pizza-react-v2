@@ -8,3 +8,7 @@ export type Pizza = {
   category: number;
   rating: number;
 };
+
+export type PizzaBlockProps = {
+  pizza: Pizza;
+};
