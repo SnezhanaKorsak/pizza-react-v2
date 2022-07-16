@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { sortTypes } from '../../constatnts/data';
 
 function Sort() {
+  const [open, setOpen] = useState(false);
+  const [sortName, setSortName] = useState('популярности');
+  const [active, setActive] = useState(1);
+
+  const sortTypeClickHandler = (id: number, event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    setSortName(event.currentTarget.textContent as string);
+    setActive(id);
+    setOpen(false);
+  };
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -14,7 +25,24 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span onClick={() => setOpen(!open)} role="presentation">
+          {sortName}
+        </span>
+        {open && (
+          <div className="sort__popup">
+            <ul>
+              {sortTypes.map(({ id, type }) => (
+                <li
+                  onClick={(event) => sortTypeClickHandler(id, event)}
+                  className={active === id ? 'active' : ''}
+                  role="presentation"
+                >
+                  {type}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

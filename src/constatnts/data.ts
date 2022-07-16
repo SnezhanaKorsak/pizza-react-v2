@@ -8,3 +8,9 @@ export const pizzaCategories: Categories[] = [
   { id: 5, category: 'Острые' },
   { id: 6, category: 'Закрытые' },
 ];
+
+export const sortTypes = [
+  { id: 1, type: 'популярности' },
+  { id: 2, type: 'цене' },
+  { id: 3, type: 'алфавиту' },
+];
