@@ -1,66 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+
+import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
-import Categories from './components/Categories';
-import Sort from './components/Sort';
-import PizzaBlock from './components/PizzaBlock';
-
-import { pizzaApi } from './api/pizza-api';
-
-import { Pizza } from './components/PizzaBlock/types';
+import Home from './components/pages/Home';
+import NotFound from './components/pages/NotFound';
+import Cart from './components/pages/Cart';
 
 import './scss/app.scss';
 
 function App() {
-  const [pizzaList, setPizzaList] = useState<Pizza[]>([]);
-
-  useEffect(() => {
-    pizzaApi.getPizzaData().then((res) => setPizzaList(res.data));
-  }, []);
-
   return (
     <div className="wrapper">
       <Header />
       <div className="content">
-        <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-            {pizzaList.map((pizza) => (
-              <PizzaBlock key={pizza.id} pizza={pizza} />
-            ))}
-          </div>
-          <ul className="Pagination_root__uwB0O">
-            <li className="previous disabled">
-              <a href="/#" className=" " role="button" aria-disabled="true" aria-label="Previous page" rel="prev">
-                &lt;
-              </a>
-            </li>
-            <li className="selected">
-              <a href="/#" rel="next" role="button" aria-label="Page 1 is your current page" aria-current="page">
-                1
-              </a>
-            </li>
-            <li>
-              <a href="/#" rel="next" role="button" aria-label="Page 2">
-                2
-              </a>
-            </li>
-            <li>
-              <a href="/#" role="button" aria-label="Page 3">
-                3
-              </a>
-            </li>
-            <li className="next">
-              <a href="/#" className="" role="button" aria-disabled="false" aria-label="Next page" rel="next">
-                &gt;
-              </a>
-            </li>
-          </ul>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );

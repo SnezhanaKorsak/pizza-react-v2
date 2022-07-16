@@ -6,7 +6,9 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:import/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
     'airbnb',
     'plugin:prettier/recommended',
     'prettier',
@@ -75,7 +77,6 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        paths: ['src'],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
