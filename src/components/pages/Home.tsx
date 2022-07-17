@@ -20,6 +20,7 @@ function Home() {
       setPizzaList(res.data);
       setIsLoading(false);
     });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
