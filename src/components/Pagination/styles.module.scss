@@ -1,0 +1,26 @@
+.paginationRoot {
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  li {
+    width: 25px;
+    height: 25px;
+
+    text-align: center;
+
+    a {
+      font-weight: 700;
+    }
+  }
+
+  .selected {
+    background-color: #fe5f1e;
+
+    a {
+      color: white;
+      line-height: 25px;
+    }
+  }
+}
