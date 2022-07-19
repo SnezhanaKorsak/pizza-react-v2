@@ -11,9 +11,9 @@ export const pizzaApi = {
   getPizzaData() {
     return instance.get<Pizza[]>('/data');
   },
-  sortFilteredPizza(sortType: SortingCategories, categoryId: number) {
+  sortFilteredPizza(sortType: SortingCategories, category: string, searchValue: string) {
     const { sort, order } = sortType;
 
-    return instance.get<Pizza[]>(`/data?category=${categoryId}&sortBy=${sort}&order=${order}`);
+    return instance.get<Pizza[]>(`/data?${category}&sortBy=${sort}&order=${order}&search=${searchValue}`);
   },
 };

@@ -7,11 +7,12 @@ import Sort from '../Sort';
 import PizzaSkeleton from '../PizzaBlock/PizzaSkeleton';
 import PizzaBlock from '../PizzaBlock';
 
+import { HomeProps } from './types';
 import { Pizza } from '../PizzaBlock/types';
 
 import { pizzaApi } from '../../api/pizza-api';
 
-function Home() {
+function Home({ searchValue }: HomeProps) {
   const [pizzaList, setPizzaList] = useState<Pizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,7 +27,8 @@ function Home() {
   useEffect(() => {
     setIsLoading(true);
 
-    const request = categoryId === 0 ? pizzaApi.getPizzaData() : pizzaApi.sortFilteredPizza(sortType, categoryId);
+    const category = categoryId !== 0 ? `category=${categoryId}` : '';
+    const request = pizzaApi.sortFilteredPizza(sortType, category, searchValue);
 
     request.then().then((res) => {
       setPizzaList(res.data);
@@ -34,7 +36,7 @@ function Home() {
     });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
 
   return (
     <div className="container">
