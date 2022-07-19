@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { sortTypes } from '../../constatnts/data';
+import { sortingCategories } from '../../constatnts/data';
 
-function Sort() {
+import { SortProps } from './types';
+import { SortingCategories } from '../../constatnts/types';
+
+function Sort({ sortType, setSortType }: SortProps) {
   const [open, setOpen] = useState(false);
-  const [sortName, setSortName] = useState('популярности');
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
 
-  const sortTypeClickHandler = (id: number, event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    setSortName(event.currentTarget.textContent as string);
-    setActive(id);
+  const sortTypeClickHandler = (sortCategory: SortingCategories) => {
+    setSortType(sortCategory);
+    setActive(sortCategory.id);
     setOpen(false);
   };
 
@@ -26,18 +28,18 @@ function Sort() {
         </svg>
         <b>Сортировка по:</b>
         <span onClick={() => setOpen(!open)} role="presentation">
-          {sortName}
+          {sortType.type}
         </span>
         {open && (
           <div className="sort__popup">
             <ul>
-              {sortTypes.map(({ id, type }) => (
+              {sortingCategories.map((sortCategory) => (
                 <li
-                  onClick={(event) => sortTypeClickHandler(id, event)}
-                  className={active === id ? 'active' : ''}
+                  onClick={() => sortTypeClickHandler(sortCategory)}
+                  className={active === sortCategory.id ? 'active' : ''}
                   role="presentation"
                 >
-                  {type}
+                  {sortCategory.type}
                 </li>
               ))}
             </ul>

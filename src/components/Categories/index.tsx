@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { pizzaCategories } from '../../constatnts/data';
 
-function Categories() {
-  const [active, setActive] = useState(1);
+import { CategoriesProps } from './types';
 
-  const activeHandler = (id: number) => setActive(id);
-
+function Categories({ categoryId, setCategoryId }: CategoriesProps) {
   return (
     <div className="categories">
       <ul>
         {pizzaCategories.map(({ id, category }) => (
-          <li key={id} onClick={() => activeHandler(id)} className={active === id ? 'active' : ''} role="presentation">
+          <li
+            key={id}
+            onClick={() => setCategoryId(id)}
+            className={categoryId === id ? 'active' : ''}
+            role="presentation"
+          >
             {category}
           </li>
         ))}

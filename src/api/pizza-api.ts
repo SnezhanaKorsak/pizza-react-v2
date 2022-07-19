@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { Pizza } from '../components/PizzaBlock/types';
+import { SortingCategories } from '../constatnts/types';
 
 const instance = axios.create({
   baseURL: 'https://62d30b8081cb1ecafa699f5a.mockapi.io',
@@ -9,5 +10,10 @@ const instance = axios.create({
 export const pizzaApi = {
   getPizzaData() {
     return instance.get<Pizza[]>('/data');
+  },
+  sortFilteredPizza(sortType: SortingCategories, categoryId: number) {
+    const { sort, order } = sortType;
+
+    return instance.get<Pizza[]>(`/data?category=${categoryId}&sortBy=${sort}&order=${order}`);
   },
 };

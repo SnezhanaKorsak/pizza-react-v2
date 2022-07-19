@@ -15,19 +15,32 @@ function Home() {
   const [pizzaList, setPizzaList] = useState<Pizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [sortType, setSortType] = useState({
+    id: 0,
+    type: 'популярности (по убыванию)',
+    sort: 'rating',
+    order: 'desc',
+  });
+  const [categoryId, setCategoryId] = useState(0);
+
   useEffect(() => {
-    pizzaApi.getPizzaData().then((res) => {
+    setIsLoading(true);
+
+    const request = categoryId === 0 ? pizzaApi.getPizzaData() : pizzaApi.sortFilteredPizza(sortType, categoryId);
+
+    request.then().then((res) => {
       setPizzaList(res.data);
       setIsLoading(false);
     });
+
     window.scrollTo(0, 0);
-  }, []);
+  }, [categoryId, sortType]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories categoryId={categoryId} setCategoryId={setCategoryId} />
+        <Sort sortType={sortType} setSortType={setSortType} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
