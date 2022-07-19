@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { v1 } from 'uuid';
 
@@ -7,12 +7,12 @@ import Sort from '../Sort';
 import PizzaSkeleton from '../PizzaBlock/PizzaSkeleton';
 import PizzaBlock from '../PizzaBlock';
 
-import { HomeProps } from './types';
 import { Pizza } from '../PizzaBlock/types';
 
 import { pizzaApi } from '../../api/pizza-api';
+import { SearchContext } from '../../context';
 
-function Home({ searchValue }: HomeProps) {
+function Home() {
   const [pizzaList, setPizzaList] = useState<Pizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,6 +23,8 @@ function Home({ searchValue }: HomeProps) {
     order: 'desc',
   });
   const [categoryId, setCategoryId] = useState(0);
+
+  const { searchValue } = useContext(SearchContext);
 
   useEffect(() => {
     setIsLoading(true);
