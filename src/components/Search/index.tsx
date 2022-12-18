@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { SearchContext } from '../../context';
 
-import style from './styles.module.scss';
+import styles from './styles.module.scss';
 
 function Search() {
   const { searchValue, setSearchValue } = useContext(SearchContext);
 
   return (
-    <div className="Search_root">
+    <div className={styles.root}>
       <svg
-        className="Search_icon"
+        className={styles.icon}
         enableBackground="new 0 0 32 32"
         id="EditableLine"
         version="1.1"
@@ -43,12 +43,12 @@ function Search() {
         />
       </svg>
       <input
-        className="Search_input"
+        className={styles.input}
         placeholder="Поиск пиццы..."
         value={searchValue}
         onChange={(event) => setSearchValue(event.currentTarget.value)}
       />
-      <button type="button" className={style.exit} onClick={() => setSearchValue('')}>
+      <button type="button" className={styles.exit} onClick={() => setSearchValue('')}>
         x
       </button>
     </div>

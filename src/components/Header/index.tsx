@@ -9,7 +9,7 @@ import pizzaLogo from '../../assets/images/pizza-logo.svg';
 function Header() {
   return (
     <div className="header">
-      <div className="container">
+      <div className="header-container">
         <Link to="/">
           <div className="header__logo">
             <img width="38" src={pizzaLogo} alt="Pizza logo" />

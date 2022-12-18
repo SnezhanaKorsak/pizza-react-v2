@@ -1,8 +1,38 @@
+.root {
+  position: relative;
+}
+
+.input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 12px 50px;
+  width: 300px;
+  border-radius: 10px 0 0 10px;
+  font-size: 16px;
+
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 970px) {
+    width: 200px;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.3;
+  position: absolute;
+  left: 12px;
+  top: 12px;
+}
+
 .exit {
-  width: 28px;
-  height: 28px;
+  width: 50px;
+  height: 50px;
   border: none;
   outline: none;
+  border-radius: 0 10px 10px 0;
   background-color: #fe5f1e;
   color: white;
   font-weight: 600;

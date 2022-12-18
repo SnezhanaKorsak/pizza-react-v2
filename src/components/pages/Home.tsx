@@ -42,7 +42,7 @@ function Home() {
   }, [categoryId, sortType, searchValue]);
 
   return (
-    <div className="container">
+    <div className="main-container">
       <div className="content__top">
         <Categories categoryId={categoryId} setCategoryId={setCategoryId} />
         <Sort sortType={sortType} setSortType={setSortType} />
