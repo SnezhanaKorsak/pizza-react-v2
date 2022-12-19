@@ -1,18 +1,24 @@
 import React from 'react';
+
 import { pizzaCategories } from '../../constatnts/data';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setCategoryId } from '../../store/filterReducer';
 
-import { CategoriesProps } from './types';
+const Categories = () => {
+  const dispatch = useAppDispatch();
+  const categoryId = useAppSelector((state) => state.filter.categoryId);
 
-function Categories({ categoryId, setCategoryId }: CategoriesProps) {
+  const clickHandler = (id: number) => () => dispatch(setCategoryId(id));
+
   return (
-    <div className="categories">
+    <div className='categories'>
       <ul>
         {pizzaCategories.map(({ id, category }) => (
           <li
             key={id}
-            onClick={() => setCategoryId(id)}
+            onClick={clickHandler(id)}
             className={categoryId === id ? 'active' : ''}
-            role="presentation"
+            role='presentation'
           >
             {category}
           </li>
@@ -20,6 +26,6 @@ function Categories({ categoryId, setCategoryId }: CategoriesProps) {
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;

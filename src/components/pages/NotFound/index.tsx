@@ -2,7 +2,7 @@ import React from 'react';
 
 import style from './styles.module.scss';
 
-function NotFound() {
+const NotFound = () => {
   return (
     <div className={style.container}>
       <span className={style.emoji}>😕</span>
@@ -10,6 +10,6 @@ function NotFound() {
       <p className={style.description}>К сожалению, данная страница отсутствует в нашем магазине</p>
     </div>
   );
-}
+};
 
 export default NotFound;

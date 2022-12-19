@@ -8,22 +8,17 @@ import PizzaSkeleton from '../PizzaBlock/PizzaSkeleton';
 import PizzaBlock from '../PizzaBlock';
 import Pagination from '../Pagination';
 
-import { Pizza } from '../PizzaBlock/types';
-
 import { pizzaApi } from '../../api/pizza-api';
 import { SearchContext } from '../../context';
+import { useAppSelector } from '../../hooks';
 
-function Home() {
+import { Pizza } from '../PizzaBlock/types';
+
+const Home = () => {
+  const { categoryId, sort } = useAppSelector((state) => state.filter);
+
   const [pizzaList, setPizzaList] = useState<Pizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const [sortType, setSortType] = useState({
-    id: 0,
-    type: 'популярности (по убыванию)',
-    sort: 'rating',
-    order: 'desc',
-  });
-  const [categoryId, setCategoryId] = useState(0);
 
   const { searchValue } = useContext(SearchContext);
 
@@ -31,7 +26,7 @@ function Home() {
     setIsLoading(true);
 
     const category = categoryId !== 0 ? `category=${categoryId}` : '';
-    const request = pizzaApi.sortFilteredPizza(sortType, category, searchValue);
+    const request = pizzaApi.sortFilteredPizza(sort, category, searchValue);
 
     request.then().then((res) => {
       setPizzaList(res.data);
@@ -39,16 +34,16 @@ function Home() {
     });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue]);
+  }, [categoryId, sort, searchValue]);
 
   return (
-    <div className="main-container">
-      <div className="content__top">
-        <Categories categoryId={categoryId} setCategoryId={setCategoryId} />
-        <Sort sortType={sortType} setSortType={setSortType} />
+    <div className='main-container'>
+      <div className='content__top'>
+        <Categories />
+        <Sort />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
+      <h2 className='content__title'>Все пиццы</h2>
+      <div className='content__items'>
         {isLoading
           ? [...new Array(6)].map(() => <PizzaSkeleton key={v1()} />)
           : pizzaList.map((pizza) => <PizzaBlock key={pizza.id} pizza={pizza} />)}
@@ -56,6 +51,6 @@ function Home() {
       <Pagination />
     </div>
   );
-}
+};
 
 export default Home;

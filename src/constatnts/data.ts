@@ -1,4 +1,4 @@
-import { Categories, SortingCategories } from './types';
+import { Categories, SortingCategories } from '../types';
 
 export const pizzaCategories: Categories[] = [
   { id: 0, category: 'Все' },

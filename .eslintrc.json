@@ -1,0 +1,87 @@
+{
+  "env": {
+  "browser": true,
+    "es2021": true
+},
+  "extends": [
+  "eslint:recommended",
+  "plugin:react/recommended",
+  "plugin:import/errors",
+  "plugin:import/warnings",
+  "plugin:import/typescript",
+  "plugin:@typescript-eslint/recommended",
+  "prettier"
+],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "ecmaVersion": "latest",
+    "sourceType": "module"
+},
+  "plugins": [
+  "react",
+  "@typescript-eslint",
+  "prettier"
+],
+  "rules": {
+  "no-debugger": 0,
+    "semi": "error",
+    "max-len": [
+    "warn",
+    {
+      "code": 120,
+      "ignoreUrls": true,
+      "ignorePattern": "import"
+    }
+  ],
+    "no-unused-vars": "warn",
+    "operator-linebreak": "warn",
+    "import/extensions": [
+    "error",
+    "ignorePackages",
+    {
+      "ts": "never",
+      "tsx": "never"
+    }
+  ],
+    "no-param-reassign": ["error", {
+    "props": true,
+    "ignorePropertyModificationsFor": [
+      "state"
+    ]
+  }],
+    "react/jsx-closing-tag-location": 2,
+    "react/jsx-closing-bracket-location": "off",
+    "react/jsx-filename-extension": [2, { "extensions": [".tsx", ".ts"] }],
+    "comma-dangle": [2, "always-multiline"],
+    "prefer-const": [
+    "error",
+    {
+      "destructuring": "any",
+      "ignoreReadBeforeAssign": false
+    }
+  ],
+    "react/jsx-fragments": [1, "element"],
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": [
+    2,
+    {
+      "namedComponents": "arrow-function",
+      "unnamedComponents": "arrow-function"
+    }
+  ],
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-empty-function": "off"
+},
+  "settings": {
+  "import/resolver": {
+    "node": {
+      "paths": ["src"],
+        "extensions": [".ts", ".tsx"]
+    }
+  }
+}
+}
