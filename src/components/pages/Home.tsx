@@ -16,6 +16,7 @@ import { Pizza } from '../PizzaBlock/types';
 
 const Home = () => {
   const { categoryId, sort } = useAppSelector((state) => state.filter);
+  const currentPage = useAppSelector((state) => state.filter.currentPage);
 
   const [pizzaList, setPizzaList] = useState<Pizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,7 @@ const Home = () => {
     setIsLoading(true);
 
     const category = categoryId !== 0 ? `category=${categoryId}` : '';
-    const request = pizzaApi.sortFilteredPizza(sort, category, searchValue);
+    const request = pizzaApi.getSortFilteredPizza(sort, category, searchValue, currentPage);
 
     request.then().then((res) => {
       setPizzaList(res.data);
@@ -34,7 +35,7 @@ const Home = () => {
     });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sort, searchValue]);
+  }, [categoryId, sort, searchValue, currentPage]);
 
   return (
     <div className='main-container'>

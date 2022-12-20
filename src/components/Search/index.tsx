@@ -1,10 +1,33 @@
-import React, { useContext } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useRef, useState } from 'react';
+import debounce from 'lodash.debounce';
+
 import { SearchContext } from '../../context';
 
 import styles from './styles.module.scss';
 
 const Search = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [value, setValue] = useState<string>('');
+  const { setSearchValue } = useContext(SearchContext);
+
+  const inputRef: React.RefObject<HTMLInputElement> = useRef(null);
+
+  const clearInput = () => {
+    setValue('');
+    updateSearchValue('');
+    inputRef.current && inputRef.current.focus();
+  };
+
+  const updateSearchValue = useCallback(
+    debounce((value: string) => {
+      setSearchValue(value);
+    }, 2000),
+    [value],
+  );
+
+  const onChangeInputValue = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value);
+    updateSearchValue(event.currentTarget.value);
+  };
 
   return (
     <div className={styles.root}>
@@ -45,10 +68,11 @@ const Search = () => {
       <input
         className={styles.input}
         placeholder='Поиск пиццы...'
-        value={searchValue}
-        onChange={(event) => setSearchValue(event.currentTarget.value)}
+        value={value}
+        ref={inputRef}
+        onChange={onChangeInputValue}
       />
-      <button type='button' className={styles.exit} onClick={() => setSearchValue('')}>
+      <button type='button' className={styles.exit} onClick={clearInput}>
         x
       </button>
     </div>
