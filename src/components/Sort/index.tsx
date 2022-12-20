@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { v1 } from 'uuid';
 
@@ -15,14 +15,32 @@ const Sort = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
 
+  const sortRef = useRef(null);
+
   const sortTypeClickHandler = (sort: SortingCategories) => {
     dispatch(setSort(sort));
     setActive(sort.id);
     setOpen(false);
   };
+  const openPopup = () => setOpen(true);
+  const closePopup = () => setOpen(false);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (sortRef.current) {
+      const path = event.composedPath().includes(sortRef.current);
+
+      if (!path) closePopup();
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside);
+  }, []);
 
   return (
-    <div className='sort'>
+    <div className='sort' ref={sortRef}>
       <div className='sort__label'>
         <svg
           width='10'
@@ -40,7 +58,7 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)} role='presentation'>
+        <span onClick={openPopup} role='presentation'>
           {sortType.type}
         </span>
         {open && (
