@@ -5,7 +5,7 @@ import CartItem from '../cart/CartItem';
 import CartButtons from '../cart/CartButtons';
 
 import { useAppSelector } from '../../hooks';
-import EmptyCart from '../cart/EmptyCart';
+import CartEmpty from '../cart/CartEmpty';
 
 const Cart = () => {
   const { totalCartPrice, totalPizzasCount, order } = useAppSelector((state) => state.cart);
@@ -14,13 +14,17 @@ const Cart = () => {
 
   const isEmptyCart = mappedItems.length === 0;
 
+  if (isEmptyCart) {
+    return <CartEmpty />;
+  }
+
   return (
     <div className='main-container'>
       <div className='container container--cart'>
         <div className='cart'>
           <CartHeader />
 
-          {isEmptyCart ? <EmptyCart /> : mappedItems}
+          {mappedItems}
 
           <div className='cart__bottom'>
             <div className='cart__bottom-details'>
