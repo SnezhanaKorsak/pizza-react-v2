@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-import { Pizza } from '../components/PizzaBlock/types';
-import { SortingCategories } from '../types';
+import { Pizza, SortingCategories } from '../types';
 
 const instance = axios.create({
   baseURL: 'https://62d30b8081cb1ecafa699f5a.mockapi.io',

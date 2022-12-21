@@ -1,6 +1,13 @@
 import React from 'react';
 
+import { useAppDispatch } from '../../hooks';
+import { clearCart } from '../../store/cartReducer';
+
 const CartHeader = () => {
+  const dispatch = useAppDispatch();
+
+  const clearAllCart = () => dispatch(clearCart());
+
   return (
     <div className='cart__top'>
       <h2 className='content__title'>
@@ -40,7 +47,7 @@ const CartHeader = () => {
         </svg>
         Корзина
       </h2>
-      <div className='cart__clear'>
+      <div className='cart__clear' onClick={clearAllCart}>
         <svg
           width='20'
           height='20'

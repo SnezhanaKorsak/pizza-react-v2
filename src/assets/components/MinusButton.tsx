@@ -1,8 +1,18 @@
 import React from 'react';
+import { useAppDispatch } from '../../hooks';
+import { decreaseCount } from '../../store/cartReducer';
 
-const MinusButton = () => {
+const MinusButton: React.FC<{ id: string }> = ({ id }) => {
+  const dispatch = useAppDispatch();
+
+  const decreasePizzaCount = () => dispatch(decreaseCount({ id }));
+
   return (
-    <button type='button' className='button button--outline button--circle cart__item-count-minus'>
+    <button
+      type='button'
+      className='button button--outline button--circle cart__item-count-minus'
+      onClick={decreasePizzaCount}
+    >
       <svg
         width='10'
         height='10'

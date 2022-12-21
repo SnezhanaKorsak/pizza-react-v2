@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFilters } from '../../store/filterReducer';
 import { sortingCategories } from '../../constatnts/data';
 
-import { Pizza } from '../PizzaBlock/types';
+import { Pizza } from '../../types';
 
 const Home = () => {
   const dispatch = useAppDispatch();

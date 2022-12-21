@@ -1,8 +1,14 @@
 import React from 'react';
+import { useAppDispatch } from '../../hooks';
+import { deletePizzaItem } from '../../store/cartReducer';
 
-const RemoveButton = () => {
+const RemoveButton: React.FC<{ id: string }> = ({ id }) => {
+  const dispatch = useAppDispatch();
+
+  const deletePizza = () => dispatch(deletePizzaItem({ id }));
+
   return (
-    <div className='cart__item-remove'>
+    <div className='cart__item-remove' onClick={deletePizza}>
       <div className='button button--outline button--circle'>
         <svg
           width='10'

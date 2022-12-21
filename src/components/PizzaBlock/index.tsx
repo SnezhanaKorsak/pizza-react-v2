@@ -1,12 +1,36 @@
 import React, { useState } from 'react';
 
+import { useAppDispatch } from '../../hooks';
+import { setPizza } from '../../store/cartReducer';
+
 import { PizzaBlockProps } from './types';
+import { PizzaInCart, pizzaTypes, SizesProperty, TypesProperty } from '../../types';
+import { getItemCartPrice } from '../../utils';
 
 const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
-  const { title, price, types, sizes, imageUrl } = pizza;
+  const dispatch = useAppDispatch();
 
-  const [activeSize, setActiveSize] = useState(sizes[0]);
-  const [activeType, setActiveType] = useState(0);
+  const [activeSize, setActiveSize] = useState<SizesProperty>(26);
+  const [activeType, setActiveType] = useState<TypesProperty>(0);
+
+  const { id, title, price, types, sizes, imageUrl, category, rating } = pizza;
+  const currentId = `${id}-${activeType}-${activeSize}`;
+  const priceByConditions = getItemCartPrice(price, activeSize, activeType);
+
+  const pizzaToCart: PizzaInCart = {
+    imageUrl,
+    title,
+    price,
+    category,
+    rating,
+    id: currentId,
+    count: 1,
+    totalPrice: priceByConditions,
+    type: activeType,
+    size: activeSize,
+  };
+
+  const addPizzaToCart = () => dispatch(setPizza(pizzaToCart));
 
   return (
     <div className='pizza-block-wrapper'>
@@ -20,11 +44,11 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
             {types.map((type) => (
               <li
                 key={type}
-                onClick={() => setActiveType(type)}
+                onClick={() => setActiveType(type as TypesProperty)}
                 className={activeType === type ? 'active' : ''}
                 role='presentation'
               >
-                {type === 0 ? 'тонкое' : 'традиционное'}
+                {pizzaTypes[String(type)]}
               </li>
             ))}
           </ul>
@@ -32,7 +56,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
             {sizes.map((size) => (
               <li
                 key={size}
-                onClick={() => setActiveSize(size)}
+                onClick={() => setActiveSize(size as SizesProperty)}
                 className={activeSize === size ? 'active' : ''}
                 role='presentation'
               >
@@ -42,8 +66,13 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
           </ul>
         </div>
         <div className='pizza-block__bottom'>
-          <div className='pizza-block__price'>от {price} ₽</div>
-          <button type='button' className='button button--outline button--add'>
+          <div className='pizza-block__price'>{priceByConditions} ₽</div>
+
+          <button
+            type='button'
+            className='button button--outline button--add'
+            onClick={addPizzaToCart}
+          >
             <svg
               width='12'
               height='12'

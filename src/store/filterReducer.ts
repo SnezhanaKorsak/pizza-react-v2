@@ -3,11 +3,11 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { SortingCategories } from '../types';
 
-export interface FilterState {
+export type FilterState = {
   categoryId: number;
   currentPage: number;
   sort: SortingCategories;
-}
+};
 
 const initialState: FilterState = {
   categoryId: 0,

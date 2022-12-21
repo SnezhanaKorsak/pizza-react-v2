@@ -1,8 +1,19 @@
 import React from 'react';
 
-const PlusButton = () => {
+import { useAppDispatch } from '../../hooks';
+import { increaseCount } from '../../store/cartReducer';
+
+const PlusButton: React.FC<{ id: string }> = ({ id }) => {
+  const dispatch = useAppDispatch();
+
+  const increasePizzaCount = () => dispatch(increaseCount({ id }));
+
   return (
-    <button type='button' className='button button--outline button--circle cart__item-count-plus'>
+    <button
+      type='button'
+      className='button button--outline button--circle cart__item-count-plus'
+      onClick={increasePizzaCount}
+    >
       <svg
         width='10'
         height='10'

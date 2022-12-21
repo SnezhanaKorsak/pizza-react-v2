@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CartButtons = () => {
+const CartButtons: React.FC<{ isEmptyCart: boolean }> = ({ isEmptyCart }) => {
+  const classNameLink = 'button button--outline button--add go-back-btn';
+  const finalClassNameLink = isEmptyCart ? `${classNameLink} active` : classNameLink;
+
   return (
     <div className='cart__bottom-buttons'>
-      <Link className='button button--outline button--add go-back-btn' to='/'>
+      <Link className={finalClassNameLink} to='/'>
         <svg
           width='8'
           height='14'
@@ -22,9 +25,11 @@ const CartButtons = () => {
         </svg>
         <span>Вернуться назад</span>
       </Link>
-      <div className='button pay-btn'>
-        <span>Оплатить сейчас</span>
-      </div>
+      {!isEmptyCart && (
+        <div className='button pay-btn'>
+          <span>Оплатить сейчас</span>
+        </div>
+      )}
     </div>
   );
 };

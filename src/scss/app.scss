@@ -295,6 +295,10 @@ body {
         }
       }
 
+      .active {
+        background-color: $black;
+      }
+
       .pay-btn {
         font-size: 16px;
         font-weight: 600;
