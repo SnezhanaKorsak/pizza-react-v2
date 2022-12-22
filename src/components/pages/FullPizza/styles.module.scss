@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    padding: 0 10px;
+  }
+
+  .view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 250px;
+
+    .pizzaImage {
+      width: 50%;
+    }
+  }
+
+  .selector {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  .sizes {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .price {
+    color: #fe5f1e;
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+

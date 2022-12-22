@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from '../../hooks';
 import { setPizza } from '../../store/reducers/cartReducer';
@@ -35,10 +36,10 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
   return (
     <div className='pizza-block-wrapper'>
       <div className='pizza-block'>
-        <a href='/pizza/4'>
+        <Link to={`/pizza/${id}`}>
           <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
           <h4 className='pizza-block__title'>{title}</h4>
-        </a>
+        </Link>
         <div className='pizza-block__selector'>
           <ul>
             {types.map((type) => (
