@@ -1,39 +1,7 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage/session';
-
-import { filterReducer } from './reducers/filterReducer';
-import { cartReducer } from './reducers/cartReducer';
-import { pizzaReducer } from './reducers/pizzasReducer';
-
-const rootPersistConfig = {
-  key: 'root',
-  storage: storage,
-  whitelist: ['cart'],
-};
-
-const cartPersistConfig = {
-  key: 'cart',
-  storage: storage,
-};
-
-const rootReducer = combineReducers({
-  cart: persistReducer(cartPersistConfig, cartReducer),
-  filter: filterReducer,
-  pizzas: pizzaReducer,
-});
-
-const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
+import { FLUSH, PAUSE, PERSIST, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
+import { persistedReducer } from './reducers';
 
 export const store = configureStore({
   reducer: persistedReducer,
