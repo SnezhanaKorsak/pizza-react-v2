@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useAppDispatch } from '../../hooks';
-import { increaseCount } from '../../store/cartReducer';
+import { increaseCount } from '../../store/reducers/cartReducer';
 
 const PlusButton: React.FC<{ id: string }> = ({ id }) => {
   const dispatch = useAppDispatch();

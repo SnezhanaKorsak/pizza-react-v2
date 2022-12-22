@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useAppDispatch } from '../../hooks';
-import { setPizza } from '../../store/cartReducer';
+import { setPizza } from '../../store/reducers/cartReducer';
 
 import { PizzaBlockProps } from './types';
 import { PizzaInCart, pizzaTypes, SizesProperty, TypesProperty } from '../../types';

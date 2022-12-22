@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useAppDispatch } from '../../hooks';
-import { clearCart } from '../../store/cartReducer';
+import { clearCart } from '../../store/reducers/cartReducer';
 
 const CartHeader = () => {
   const dispatch = useAppDispatch();

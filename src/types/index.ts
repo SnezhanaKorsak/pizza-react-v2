@@ -37,6 +37,8 @@ export const pizzaTypes: PizzaTypes = {
   1: 'традиционное',
 };
 
+export type Status = 'loading' | 'success' | 'error';
+
 type SortingTypes =
   | 'популярности (по убыванию)'
   | 'популярности (по возрастанию)'

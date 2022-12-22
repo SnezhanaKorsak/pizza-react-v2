@@ -2,7 +2,7 @@ import React from 'react';
 
 import { pizzaCategories } from '../../constatnts/data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setCategoryId } from '../../store/filterReducer';
+import { setCategoryId } from '../../store/reducers/filterReducer';
 
 const Categories = () => {
   const dispatch = useAppDispatch();

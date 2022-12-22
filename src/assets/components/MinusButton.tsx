@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch } from '../../hooks';
-import { decreaseCount } from '../../store/cartReducer';
+import { decreaseCount } from '../../store/reducers/cartReducer';
 
 const MinusButton: React.FC<{ id: string }> = ({ id }) => {
   const dispatch = useAppDispatch();

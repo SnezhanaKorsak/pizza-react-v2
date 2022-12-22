@@ -2,7 +2,7 @@ import React from 'react';
 
 import ReactPaginate from 'react-paginate';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setPageCount } from '../../store/filterReducer';
+import { setPageCount } from '../../store/reducers/filterReducer';
 
 import './Pagination.css';
 

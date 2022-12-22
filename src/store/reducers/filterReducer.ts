@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { SortingCategories } from '../types';
+import { SortingCategories } from '../../types';
 
 export type FilterState = {
   categoryId: number;

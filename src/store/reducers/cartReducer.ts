@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { PizzaInCart } from '../types';
-import { getTotalCount, getTotalPrice } from '../utils';
+import { PizzaInCart } from '../../types';
+import { getTotalCount, getTotalPrice } from '../../utils';
 
 export type InitialState = {
   order: PizzaInCart[];

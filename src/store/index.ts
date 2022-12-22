@@ -10,10 +10,11 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage/session';
 
-import { filterReducer } from './filterReducer';
-import { cartReducer } from './cartReducer';
+import { filterReducer } from './reducers/filterReducer';
+import { cartReducer } from './reducers/cartReducer';
+import { pizzaReducer } from './reducers/pizzasReducer';
 
 const rootPersistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ const cartPersistConfig = {
 const rootReducer = combineReducers({
   cart: persistReducer(cartPersistConfig, cartReducer),
   filter: filterReducer,
+  pizzas: pizzaReducer,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

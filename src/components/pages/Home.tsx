@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import { v1 } from 'uuid';
 import qs from 'qs';
@@ -10,21 +10,19 @@ import PizzaSkeleton from '../PizzaBlock/PizzaSkeleton';
 import PizzaBlock from '../PizzaBlock';
 import Pagination from '../Pagination';
 
-import { pizzaApi } from '../../api/pizza-api';
 import { SearchContext } from '../../context';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setFilters } from '../../store/filterReducer';
+import { setFilters } from '../../store/reducers/filterReducer';
 import { sortingCategories } from '../../constatnts/data';
 
-import { Pizza } from '../../types';
+import { fetchPizzas } from '../../store/reducers/pizzasReducer';
+import Error from './Error';
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const { categoryId, sort } = useAppSelector((state) => state.filter);
   const currentPage = useAppSelector((state) => state.filter.currentPage);
-
-  const [pizzaList, setPizzaList] = useState<Pizza[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { pizzasList, status } = useAppSelector((state) => state.pizzas);
 
   const { searchValue } = useContext(SearchContext);
   const navigate = useNavigate();
@@ -52,15 +50,8 @@ const Home = () => {
     window.scrollTo(0, 0);
 
     if (!isSearch.current) {
-      setIsLoading(true);
-
       const category = categoryId !== 0 ? `category=${categoryId}` : '';
-      const request = pizzaApi.getSortFilteredPizza(sort, category, searchValue, currentPage);
-
-      request.then().then((res) => {
-        setPizzaList(res.data);
-        setIsLoading(false);
-      });
+      dispatch(fetchPizzas({ sortType: sort, category, searchValue, currentPage }));
     }
 
     isSearch.current = false;
@@ -83,6 +74,10 @@ const Home = () => {
     isMounted.current = true;
   }, [categoryId, sort, currentPage]);
 
+  if (status === 'error') {
+    return <Error />;
+  }
+
   return (
     <div className='main-container'>
       <div className='content__top'>
@@ -91,9 +86,9 @@ const Home = () => {
       </div>
       <h2 className='content__title'>Все пиццы</h2>
       <div className='content__items'>
-        {isLoading
-          ? [...new Array(6)].map(() => <PizzaSkeleton key={v1()} />)
-          : pizzaList.map((pizza) => <PizzaBlock key={pizza.id} pizza={pizza} />)}
+        {status === 'success'
+          ? pizzasList.map((pizza) => <PizzaBlock key={pizza.id} pizza={pizza} />)
+          : [...new Array(6)].map(() => <PizzaSkeleton key={v1()} />)}
       </div>
       <Pagination />
     </div>

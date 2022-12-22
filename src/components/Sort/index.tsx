@@ -4,7 +4,7 @@ import { v1 } from 'uuid';
 
 import { sortingCategories } from '../../constatnts/data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSort } from '../../store/filterReducer';
+import { setSort } from '../../store/reducers/filterReducer';
 
 import { SortingCategories } from '../../types';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch } from '../../hooks';
-import { deletePizzaItem } from '../../store/cartReducer';
+import { deletePizzaItem } from '../../store/reducers/cartReducer';
 
 const RemoveButton: React.FC<{ id: string }> = ({ id }) => {
   const dispatch = useAppDispatch();
