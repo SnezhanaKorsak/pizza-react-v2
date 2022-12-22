@@ -7,12 +7,11 @@ export const selectCart = (state: RootState) => state.cart;
 export const selectFilters = (state: RootState) => state.filter;
 
 export const selectOrder = createSelector(selectCart, (cart) => cart.order);
-export const selectPizzasArr = createSelector(selectPizzas, (pizzas) => pizzas.pizzasList);
 
 export const selectCurrentPizza = createSelector(
   [selectOrder, (state, itemId: string) => itemId],
   (order, itemId) => order.find(({ id }) => id === itemId),
 );
 
-export const selectCurrentPizzaFromList = (pizzaId: number) => (state: RootState) =>
+export const selectCurrentPizzaFromList = (pizzaId: string) => (state: RootState) =>
   state.pizzas.pizzasList.find(({ id }) => id === pizzaId);

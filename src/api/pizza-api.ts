@@ -12,7 +12,7 @@ export type PizzaApiRequestData = {
 };
 
 const instance = axios.create({
-  baseURL: 'https://62d30b8081cb1ecafa699f5a.mockapi.io',
+  baseURL: 'https://62d30b8081cb1ecafa699f5a.mockapi.io/data',
 });
 
 export const pizzaApi = {
@@ -20,7 +20,10 @@ export const pizzaApi = {
     const { sort, order } = sortType;
 
     return instance.get<Pizza[]>(
-      `/data?${category}&sortBy=${sort}&order=${order}&search=${searchValue}&page=${currentPage}&limit=${itemsPerPage}`,
+      `?${category}&sortBy=${sort}&order=${order}&search=${searchValue}&page=${currentPage}&limit=${itemsPerPage}`,
     );
+  },
+  getPizza(id: string) {
+    return instance.get<Pizza>(`/${id}`);
   },
 };

@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { useAppSelector } from '../../../hooks';
-import { selectCurrentPizzaFromList } from '../../../store/selectors';
 
 import { Pizza } from '../../../types';
 import styles from './styles.module.scss';
+import { getCurrentPizza } from '../../../servers';
 
 const FullPizza = () => {
   const { id } = useParams();
+  const [currentPizza, setCurrentPizza] = useState<Pizza | null>(null);
+  const pizzaId = id ?? '';
 
-  const pizzaId = id ?? 0;
+  useEffect(() => {
+    getCurrentPizza(pizzaId).then((res) => setCurrentPizza(res.data));
+  }, []);
 
-  const pizza = useAppSelector<Pizza | undefined>(selectCurrentPizzaFromList(+pizzaId));
-
-  if (!pizza) {
+  if (!currentPizza) {
     return null;
   }
 
-  const { title, sizes, price, imageUrl } = pizza;
+  const { title, sizes, price, imageUrl } = currentPizza;
 
   return (
     <div className={styles.container}>

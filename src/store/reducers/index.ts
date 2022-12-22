@@ -9,7 +9,7 @@ import { pizzaReducer } from './pizzasReducer';
 const rootPersistConfig = {
   key: 'root',
   storage: storage,
-  whitelist: ['cart', 'pizzas'],
+  whitelist: ['cart'],
 };
 
 const cartPersistConfig = {
@@ -17,15 +17,10 @@ const cartPersistConfig = {
   storage: storage,
 };
 
-const pizzasPersistConfig = {
-  key: 'pizzas',
-  storage: storage,
-};
-
 const rootReducer = combineReducers({
   cart: persistReducer(cartPersistConfig, cartReducer),
   filter: filterReducer,
-  pizzas: persistReducer(pizzasPersistConfig, pizzaReducer),
+  pizzas: pizzaReducer,
 });
 
 export const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

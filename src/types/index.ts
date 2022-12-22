@@ -11,7 +11,7 @@ export type Categories = {
 };
 
 export type Pizza = {
-  id: number | string;
+  id: string;
   imageUrl: string;
   title: string;
   types: number[];
