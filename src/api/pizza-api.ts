@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { itemsPerPage } from '../constatnts/data';
+
 import { Pizza, SortingCategories } from '../types';
 
 export type PizzaApiRequestData = {
@@ -18,7 +20,7 @@ export const pizzaApi = {
     const { sort, order } = sortType;
 
     return instance.get<Pizza[]>(
-      `/data?${category}&sortBy=${sort}&order=${order}&search=${searchValue}&page=${currentPage}&limit=6`,
+      `/data?${category}&sortBy=${sort}&order=${order}&search=${searchValue}&page=${currentPage}&limit=${itemsPerPage}`,
     );
   },
 };

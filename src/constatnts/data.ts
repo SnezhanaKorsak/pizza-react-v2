@@ -17,3 +17,5 @@ export const sortingCategories: SortingCategories[] = [
   { id: 4, type: 'алфавиту (по убыванию)', sort: 'title', order: 'desc' },
   { id: 5, type: 'алфавиту (по возрастанию)', sort: 'title', order: 'asc' },
 ];
+
+export const itemsPerPage = 3;
