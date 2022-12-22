@@ -5,12 +5,13 @@ import { v1 } from 'uuid';
 import { sortingCategories } from '../../constatnts/data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSort } from '../../store/reducers/filterReducer';
+import { selectFilters } from '../../store/selectors';
 
 import { SortingCategories } from '../../types';
 
 const Sort = () => {
   const dispatch = useAppDispatch();
-  const sortType = useAppSelector((state) => state.filter.sort);
+  const { sort: sortType } = useAppSelector(selectFilters);
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);

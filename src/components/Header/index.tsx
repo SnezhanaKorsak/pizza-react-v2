@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import Search from '../Search';
 
 import { useAppSelector } from '../../hooks';
+import { selectCart } from '../../store/selectors';
 
 import pizzaLogo from '../../assets/images/pizza-logo.svg';
 
 const Header = () => {
-  const { totalPizzasCount, totalCartPrice } = useAppSelector((state) => state.cart);
+  const { totalPizzasCount, totalCartPrice } = useAppSelector(selectCart);
 
   return (
     <div className='header'>

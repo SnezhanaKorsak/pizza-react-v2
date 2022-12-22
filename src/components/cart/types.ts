@@ -1,3 +1,3 @@
 export type CartItemProps = {
-  itemId: number | string;
+  itemId: string;
 };

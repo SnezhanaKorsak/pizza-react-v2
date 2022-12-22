@@ -3,12 +3,13 @@ import React from 'react';
 import CartHeader from '../cart/CartHeader';
 import CartItem from '../cart/CartItem';
 import CartButtons from '../cart/CartButtons';
-
-import { useAppSelector } from '../../hooks';
 import CartEmpty from '../cart/CartEmpty';
 
+import { useAppSelector } from '../../hooks';
+import { selectCart } from '../../store/selectors';
+
 const Cart = () => {
-  const { totalCartPrice, totalPizzasCount, order } = useAppSelector((state) => state.cart);
+  const { totalCartPrice, totalPizzasCount, order } = useAppSelector(selectCart);
 
   const mappedItems = order.map(({ id }) => <CartItem key={id} itemId={id} />);
 

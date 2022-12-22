@@ -5,14 +5,13 @@ import PlusButton from '../../assets/components/PlusButton';
 import MinusButton from '../../assets/components/MinusButton';
 
 import { useAppSelector } from '../../hooks';
+import { selectCurrentPizza } from '../../store/selectors';
 
 import { CartItemProps } from './types';
 import { PizzaInCart, pizzaTypes } from '../../types';
 
 const CartItem: React.FC<CartItemProps> = ({ itemId }) => {
-  const { order } = useAppSelector((state) => state.cart);
-
-  const currentPizza = order.find(({ id }) => id === itemId);
+  const currentPizza = useAppSelector((state) => selectCurrentPizza(state, itemId));
 
   if (!currentPizza) {
     return null;

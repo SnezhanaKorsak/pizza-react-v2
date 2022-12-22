@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setPageCount } from '../../store/reducers/filterReducer';
+import { itemsPerPage } from '../../constatnts/data';
+import { selectFilters } from '../../store/selectors';
 
 import './Pagination.css';
-import { itemsPerPage } from '../../constatnts/data';
 
 const Pagination = () => {
   const dispatch = useAppDispatch();
-  const currentPage = useAppSelector((state) => state.filter.currentPage);
+  const { currentPage } = useAppSelector(selectFilters);
   const pizzasCount = 10;
 
   const [pageNumber, setPageNumber] = useState(0);

@@ -9,20 +9,19 @@ import Sort from '../Sort';
 import PizzaSkeleton from '../PizzaBlock/PizzaSkeleton';
 import PizzaBlock from '../PizzaBlock';
 import Pagination from '../Pagination';
+import Error from './Error';
 
 import { SearchContext } from '../../context';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFilters } from '../../store/reducers/filterReducer';
 import { sortingCategories } from '../../constatnts/data';
-
 import { fetchPizzas } from '../../store/reducers/pizzasReducer';
-import Error from './Error';
+import { selectFilters, selectPizzas } from '../../store/selectors';
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const { categoryId, sort } = useAppSelector((state) => state.filter);
-  const currentPage = useAppSelector((state) => state.filter.currentPage);
-  const { pizzasList, status } = useAppSelector((state) => state.pizzas);
+  const { categoryId, sort, currentPage } = useAppSelector(selectFilters);
+  const { pizzasList, status } = useAppSelector(selectPizzas);
 
   const { searchValue } = useContext(SearchContext);
   const navigate = useNavigate();

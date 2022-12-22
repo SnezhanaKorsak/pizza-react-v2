@@ -3,10 +3,11 @@ import React from 'react';
 import { pizzaCategories } from '../../constatnts/data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCategoryId } from '../../store/reducers/filterReducer';
+import { selectFilters } from '../../store/selectors';
 
 const Categories = () => {
   const dispatch = useAppDispatch();
-  const categoryId = useAppSelector((state) => state.filter.categoryId);
+  const { categoryId } = useAppSelector(selectFilters);
 
   const clickHandler = (id: number) => () => dispatch(setCategoryId(id));
 
