@@ -21,7 +21,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
   const pizzaToCart: PizzaInCart = {
     imageUrl,
     title,
-    price,
+    price: priceByConditions,
     category,
     rating,
     id: currentId,

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCategoryId } from '../../store/reducers/filterReducer';
 import { selectFilters } from '../../store/selectors';
 
-const Categories = () => {
+const Categories = React.memo(() => {
   const dispatch = useAppDispatch();
   const { categoryId } = useAppSelector(selectFilters);
 
@@ -27,6 +27,8 @@ const Categories = () => {
       </ul>
     </div>
   );
-};
+});
+
+Categories.displayName = 'Categories';
 
 export default Categories;

@@ -9,7 +9,7 @@ import { selectFilters } from '../../store/selectors';
 
 import { SortingCategories } from '../../types';
 
-const Sort = () => {
+const Sort = React.memo(() => {
   const dispatch = useAppDispatch();
   const { sort: sortType } = useAppSelector(selectFilters);
 
@@ -81,6 +81,8 @@ const Sort = () => {
       </div>
     </div>
   );
-};
+});
+
+Sort.displayName = 'Sort';
 
 export default Sort;

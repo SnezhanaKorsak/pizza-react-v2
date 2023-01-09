@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CartButtons: React.FC<{ isEmptyCart: boolean }> = ({ isEmptyCart }) => {
+const CartButtons: React.FC<{ isEmptyCart: boolean }> = React.memo(({ isEmptyCart }) => {
   const classNameLink = 'button button--outline button--add go-back-btn';
   const finalClassNameLink = isEmptyCart ? `${classNameLink} active` : classNameLink;
 
@@ -32,6 +32,8 @@ const CartButtons: React.FC<{ isEmptyCart: boolean }> = ({ isEmptyCart }) => {
       )}
     </div>
   );
-};
+});
+
+CartButtons.displayName = 'CartButtons';
 
 export default CartButtons;

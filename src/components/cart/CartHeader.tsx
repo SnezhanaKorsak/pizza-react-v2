@@ -3,7 +3,7 @@ import React from 'react';
 import { useAppDispatch } from '../../hooks';
 import { clearCart } from '../../store/reducers/cartReducer';
 
-const CartHeader = () => {
+const CartHeader = React.memo(() => {
   const dispatch = useAppDispatch();
 
   const clearAllCart = () => dispatch(clearCart());
@@ -92,6 +92,8 @@ const CartHeader = () => {
       </div>
     </div>
   );
-};
+});
+
+CartHeader.displayName = 'CartHeader';
 
 export default CartHeader;

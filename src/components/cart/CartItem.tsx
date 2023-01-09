@@ -10,7 +10,7 @@ import { selectCurrentPizza } from '../../store/selectors';
 import { CartItemProps } from './types';
 import { PizzaInCart, pizzaTypes } from '../../types';
 
-const CartItem: React.FC<CartItemProps> = ({ itemId }) => {
+const CartItem: React.FC<CartItemProps> = React.memo(({ itemId }) => {
   const currentPizza = useAppSelector((state) => selectCurrentPizza(state, itemId));
 
   if (!currentPizza) {
@@ -44,6 +44,8 @@ const CartItem: React.FC<CartItemProps> = ({ itemId }) => {
       </div>
     </div>
   );
-};
+});
+
+CartItem.displayName = 'CartItem';
 
 export default CartItem;
