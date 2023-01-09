@@ -6,7 +6,7 @@ import Home from './components/pages/Home';
 import NotFound from './components/pages/NotFound';
 import Cart from './components/pages/Cart';
 import FullPizza from './components/pages/FullPizza';
-import Layout from './Layout/indez';
+import Layout from './Layout';
 
 import './scss/app.scss';
 
